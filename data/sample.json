@@ -1,9 +1,26 @@
 {
-  "event_id": "sample-019-001",
+  "event_id": "evt-sample-001",
   "event_type": "CATALOG_DRAFTED",
-  "aggregate_type": "national_item",
-  "aggregate_id": "medical_catalog_mapping-001",
+  "aggregate_type": "catalog_version",
+  "aggregate_id": "NAT-MSL-2026",
   "occurred_at": "2026-09-20T18:00:00+08:00",
   "version": 1,
-  "summary": "登记医保服务目录映射台的首条领域记录"
+  "summary": "草拟国家医保服务目录 2026 试运行版（本条为草稿，尚未进入正式发布链）",
+  "payload": {
+    "catalog_id": "NAT-MSL-2026",
+    "name": "国家基本医疗保险医疗服务项目目录（2026 试运行版）",
+    "level": "national",
+    "scope": "CN",
+    "items": [
+      {
+        "code": "N110100001",
+        "name": "普通病房床位费",
+        "clinical_content": "普通病床的住院床位使用及基础病室设施。",
+        "exclusions": ["陪护床", "一次性生活用品"],
+        "pricing_unit": "日",
+        "applicable_institutions": ["三级", "二级", "一级", "基层"],
+        "payment_conditions": { "prior_auth_required": false }
+      }
+    ]
+  }
 }
