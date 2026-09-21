@@ -2,8 +2,35 @@
   "event_id": "sample-019-001",
   "event_type": "CATALOG_DRAFTED",
   "aggregate_type": "national_item",
-  "aggregate_id": "medical_catalog_mapping-001",
+  "aggregate_id": "item:national:N-DEMO-000",
   "occurred_at": "2026-09-20T18:00:00+08:00",
   "version": 1,
-  "summary": "登记医保服务目录映射台的首条领域记录"
+  "seq": 1,
+  "prev_event_id": null,
+  "summary": "登记医保服务目录映射台的首条领域记录",
+  "payload": {
+    "scope": "national",
+    "item_code": "N-DEMO-000",
+    "name": "示例项目",
+    "clinical_intent": "用于本地联调的示例临床内涵",
+    "exclusions": [],
+    "pricing_unit": "次",
+    "eligible_facilities": [
+      "三级医院"
+    ],
+    "payment_conditions": [],
+    "expert_review": {
+      "committee": "示例专家组",
+      "conclusion": "仅用于联调",
+      "evidence_refs": []
+    },
+    "revision": 1,
+    "effective_from": null
+  },
+  "actor": {
+    "id": "U-DEMO",
+    "name": "联调账号",
+    "role": "catalog_admin"
+  },
+  "chain_hash": "7501f9e45e9193c4cbf769e9a25794a98b6fdc3966160932f03f7b81753737aa"
 }

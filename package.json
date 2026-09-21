@@ -1,10 +1,11 @@
 {
   "name": "medical-catalog-mapping",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "领域事件基础校验",
+  "description": "国家与省级医疗服务目录版本映射与跨省结算口径平台",
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "demo": "node src/demo.js"
   }
 }

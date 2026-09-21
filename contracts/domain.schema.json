@@ -1,6 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "医保服务目录映射台领域事件",
+  "description": "追加式发布链上的事件信封。seq 为仓库全局发布序号，prev_event_id 指向前一条事件，chain_hash 为除自身哈希外字段的 SHA-256；负载的形态约束见 src/validator.js。",
   "type": "object",
   "required": [
     "event_id",
@@ -9,7 +10,11 @@
     "aggregate_id",
     "occurred_at",
     "version",
-    "summary"
+    "seq",
+    "prev_event_id",
+    "chain_hash",
+    "summary",
+    "payload"
   ],
   "properties": {
     "event_id": {
@@ -20,9 +25,18 @@
       "type": "string",
       "enum": [
         "CATALOG_DRAFTED",
+        "CATALOG_REVISED",
+        "CATALOG_CORRECTED",
+        "VERSION_ACTIVATED",
+        "ITEM_DISCONTINUED",
+        "RULE_PUBLISHED",
         "MAPPING_PROPOSED",
         "MAPPING_APPROVED",
-        "VERSION_ACTIVATED",
+        "MAPPING_REJECTED",
+        "MAPPING_DEACTIVATED",
+        "CLAIM_PRECHECKED",
+        "CLAIM_SUBMITTED",
+        "CLAIM_SEALED",
         "CLAIM_ADJUSTED"
       ]
     },
@@ -31,8 +45,9 @@
       "enum": [
         "national_item",
         "provincial_item",
+        "payment_rule",
         "mapping_decision",
-        "claim_line"
+        "claim"
       ]
     },
     "aggregate_id": {
@@ -45,12 +60,40 @@
     },
     "version": {
       "type": "integer",
-      "minimum": 1
+      "minimum": 1,
+      "description": "聚合内连续递增的版本号。"
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "仓库全局发布序号，从 1 连续递增。"
+    },
+    "prev_event_id": {
+      "type": ["string", "null"],
+      "description": "链上前一条事件编号，首条为 null。"
+    },
+    "chain_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "对事件规范表示（不含本字段）计算的 SHA-256。"
     },
     "summary": {
       "type": "string",
       "minLength": 1
+    },
+    "actor": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string" }
+      },
+      "required": ["id", "name", "role"]
+    },
+    "payload": {
+      "type": "object",
+      "description": "按 event_type 区分的事件负载，形态校验由 src/validator.js 实施。"
     }
   },
-  "additionalProperties": true
+  "additionalProperties": false
 }
